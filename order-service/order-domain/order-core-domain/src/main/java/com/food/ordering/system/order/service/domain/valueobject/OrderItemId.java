@@ -5,7 +5,7 @@ import com.food.ordering.system.domain.valueobject.BaseId;
 import java.util.UUID;
 
 public class OrderItemId extends BaseId<Long> {
-    protected OrderItemId(Long value) {
+    public OrderItemId(Long value) {
         super(value);
     }
 }
