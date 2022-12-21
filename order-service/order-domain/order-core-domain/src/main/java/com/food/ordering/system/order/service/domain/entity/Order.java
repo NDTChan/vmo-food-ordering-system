@@ -35,6 +35,42 @@ public class Order extends AggregateRoot<OrderId> {
         validateItemsPrice();
     }
 
+    public void pay() {
+        if (!Objects.equals(status, OrderStatus.PENDING))
+            throw new OrderDomainException("Order is not in correct state for pay operation!");
+        status = OrderStatus.PAID;
+
+    }
+
+    public void approve() {
+        if (!Objects.equals(status, OrderStatus.PAID))
+            throw new OrderDomainException("Order is not in correct state for approve operation!");
+        status = OrderStatus.APPROVED;
+    }
+
+    public void initCancel(List<String> failureMessages) {
+        if (!Objects.equals(status, OrderStatus.PAID))
+            throw new OrderDomainException("Order is not correct state for initCancel operation!");
+        status = OrderStatus.CANCELLING;
+        updateFailureMessages(failureMessages);
+    }
+
+    public void cancel(List<String> failureMessages) {
+        if (!(Objects.equals(status, OrderStatus.CANCELLING) || Objects.equals(status, OrderStatus.PENDING)))
+            throw new OrderDomainException("Order is not correct state for cancel operation !");
+        status = OrderStatus.CANCELLED;
+        updateFailureMessages(failureMessages);
+    }
+
+    private void updateFailureMessages(List<String> failureMessages) {
+        if (Objects.nonNull(this.failureMessages) && Objects.nonNull(failureMessages)) {
+            this.failureMessages.addAll(failureMessages.stream().filter(Objects::nonNull).toList());
+        } else {
+            this.failureMessages = failureMessages;
+        }
+    }
+
+
     private void validateItemsPrice() {
         Money orderItemsTotal = items
                 .stream()
@@ -58,13 +94,13 @@ public class Order extends AggregateRoot<OrderId> {
     }
 
     private void validateTotalPrice() {
-        if (Objects.nonNull(price) && !price.isGreaterThanZero()) {
+        if (Objects.isNull(price) || !price.isGreaterThanZero()) {
             throw new OrderDomainException("Total price must be greater than zero!");
         }
     }
 
     private void validateInitialOrder() {
-        if (Objects.nonNull(status) && Objects.nonNull(getId()))
+        if (Objects.nonNull(status) || Objects.nonNull(getId()))
             throw new OrderDomainException("Order is not in correct state for initialization!");
 
     }
