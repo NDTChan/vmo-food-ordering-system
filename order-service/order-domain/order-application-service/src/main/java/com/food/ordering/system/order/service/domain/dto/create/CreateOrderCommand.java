@@ -1,4 +1,4 @@
-package com.food.ordering.system.dto.create;
+package com.food.ordering.system.order.service.domain.dto.create;
 
 import com.food.ordering.system.order.service.domain.entity.OrderItem;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.food.ordering.system.dto.message;
+package com.food.ordering.system.order.service.domain.dto.message;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
