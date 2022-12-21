@@ -66,6 +66,19 @@
         </dependencies>
     </dependencyManagement>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -76,24 +89,24 @@
                     <release>17</release>
                 </configuration>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>com.github.ferstl</groupId>-->
-<!--                <artifactId>depgraph-maven-plugin</artifactId>-->
-<!--                <version>4.0.1</version>-->
-<!--                <configuration>-->
-<!--                    <scope>compile</scope>-->
-<!--                    <graphFormat>png</graphFormat>-->
-<!--                    <createImage>true</createImage>-->
-<!--                    <excludes>-->
-<!--                        <exclude>org.slf4j:slf4j-api</exclude>-->
-<!--                        <exclude>com.google.guava:guava</exclude>-->
-<!--                        <exclude>io.vavr:vavr</exclude>-->
-<!--                    </excludes>-->
-<!--                    <transitiveExcludes>-->
-<!--                        <transitiveExclude>*</transitiveExclude>-->
-<!--                    </transitiveExcludes>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>com.github.ferstl</groupId>-->
+            <!--                <artifactId>depgraph-maven-plugin</artifactId>-->
+            <!--                <version>4.0.1</version>-->
+            <!--                <configuration>-->
+            <!--                    <scope>compile</scope>-->
+            <!--                    <graphFormat>png</graphFormat>-->
+            <!--                    <createImage>true</createImage>-->
+            <!--                    <excludes>-->
+            <!--                        <exclude>org.slf4j:slf4j-api</exclude>-->
+            <!--                        <exclude>com.google.guava:guava</exclude>-->
+            <!--                        <exclude>io.vavr:vavr</exclude>-->
+            <!--                    </excludes>-->
+            <!--                    <transitiveExcludes>-->
+            <!--                        <transitiveExclude>*</transitiveExclude>-->
+            <!--                    </transitiveExcludes>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
         </plugins>
     </build>
 
