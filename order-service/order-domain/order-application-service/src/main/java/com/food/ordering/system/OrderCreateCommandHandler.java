@@ -18,7 +18,6 @@ public class OrderCreateCommandHandler {
 
     private final OrderCreatedPaymentRequestMessagePublisher orderCreatedPaymentRequestMessagePublisher;
 
-
     public CreateOrderResponse createOrder(CreateOrderCommand createOrderCommand) {
         var persistOrder = orderCreateHelper.persistOrder(createOrderCommand);
         log.info("createOrder with id: {}", persistOrder.getOrder().getId().getValue());
