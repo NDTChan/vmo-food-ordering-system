@@ -19,7 +19,6 @@ public class OrderTrackCommandHandler {
     private final OrderRepository orderRepository;
     private final OrderDataMapper orderDataMapper;
 
-
     @Transactional(readOnly = true)
     public TrackOrderResponse trackOrder(TrackOrderQuery trackOrderQuery) {
         var order = orderRepository.findByTrackingId
