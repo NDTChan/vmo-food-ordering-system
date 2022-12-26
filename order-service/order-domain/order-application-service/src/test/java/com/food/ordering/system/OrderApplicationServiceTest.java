@@ -168,7 +168,7 @@ public class OrderApplicationServiceTest {
         OrderDomainException orderDomainException = assertThrows(OrderDomainException.class,
                 () -> orderApplicationService.createOrder(createOrderCommandWrongProductPrice));
         assertEquals(orderDomainException.getMessage(),
-                "Order item price is not valid");
+                "Order item price: 210.00 is not valid for product " + PRODUCT_ID);
     }
 
     @Test

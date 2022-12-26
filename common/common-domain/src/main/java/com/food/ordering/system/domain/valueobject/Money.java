@@ -2,11 +2,8 @@ package com.food.ordering.system.domain.valueobject;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Objects;
 
-public class Money {
-    private final BigDecimal amount;
-
+public record Money(BigDecimal amount) {
     public static final Money ZERO = new Money(BigDecimal.ZERO);
 
     public boolean isGreaterThanZero() {
@@ -14,27 +11,19 @@ public class Money {
     }
 
     public boolean isGreaterThan(Money money) {
-        return this.amount != null && this.amount.compareTo(money.getAmount()) > 0;
+        return this.amount != null && this.amount.compareTo(money.amount()) > 0;
     }
 
     public Money add(Money money) {
-        return new Money(setScale(this.amount.add(money.getAmount())));
+        return new Money(setScale(this.amount.add(money.amount())));
     }
 
     public Money subtract(Money money) {
-        return new Money(setScale(this.amount.subtract(money.getAmount())));
+        return new Money(setScale(this.amount.subtract(money.amount())));
     }
 
     public Money multiply(int multiplier) {
         return new Money(setScale(this.amount.multiply(new BigDecimal(multiplier))));
-    }
-
-    public Money(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
     }
 
     @Override
@@ -43,11 +32,6 @@ public class Money {
         if (o == null || getClass() != o.getClass()) return false;
         Money money = (Money) o;
         return amount.equals(money.amount);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(amount);
     }
 
     private BigDecimal setScale(BigDecimal input) {
