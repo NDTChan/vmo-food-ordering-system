@@ -13,6 +13,8 @@ import java.util.UUID;
 
 // Not using lombok because I want domain core independent with framework
 public class Order extends AggregateRoot<OrderId> {
+
+    public static final String FAILURE_MESSAGE_DELIMITER = ",";
     private final CustomerId customerId;
     private final RestaurantId restaurantId;
     private final StreetAddress deliveryAddress;
