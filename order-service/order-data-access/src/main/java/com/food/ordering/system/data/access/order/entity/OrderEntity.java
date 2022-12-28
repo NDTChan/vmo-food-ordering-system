@@ -2,7 +2,6 @@ package com.food.ordering.system.data.access.order.entity;
 
 import com.food.ordering.system.domain.valueobject.OrderStatus;
 import lombok.*;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -10,7 +9,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@DynamicUpdate
 @Table(name = "orders")
 @Getter
 @Setter
