@@ -1,5 +1,9 @@
 package com.food.ordering.system.order.service.messaging.mapper;
 
+import com.food.ordering.system.domain.valueobject.OrderApprovalStatus;
+import com.food.ordering.system.domain.valueobject.PaymentStatus;
+import com.food.ordering.system.dto.message.PaymentResponse;
+import com.food.ordering.system.dto.message.RestaurantApprovalResponse;
 import com.food.ordering.system.entity.Order;
 import com.food.ordering.system.event.OrderCreatedEvent;
 import com.food.ordering.system.event.OrderPaidEvent;
@@ -53,6 +57,34 @@ public class OrderMessagingDataMapper {
                                 .build()).toList())
                 .setPrice(order.getPrice().amount())
                 .setCreatedAt(orderPaidEvent.getCreatedAt().toInstant())
+                .build();
+    }
+
+    public PaymentResponse paymentResponseAvroModelToPaymentResponse(PaymentResponseAvroModel message) {
+        return PaymentResponse.builder()
+                .id(message.getId())
+                .orderId(message.getOrderId())
+                .sagaId(message.getSagaId())
+                .paymentId(message.getPaymentId())
+                .customerId(message.getCustomerId())
+                .orderId(message.getOrderId())
+                .price(message.getPrice())
+                .createdAt(message.getCreatedAt())
+                .paymentStatus(PaymentStatus.valueOf(message.getPaymentStatus().name()))
+                .failureMessages(message.getFailureMessages())
+                .build();
+    }
+
+    public RestaurantApprovalResponse restaurantApprovalResponseAvroModelToRestaurantApprovalResponse(RestaurantApprovalResponseAvroModel message) {
+        return RestaurantApprovalResponse.builder()
+                .orderId(message.getOrderId())
+                .sagaId(message.getSagaId())
+                .restaurantId(message.getRestaurantId())
+                .id(message.getId())
+                .sagaId(message.getSagaId())
+                .createdAt(message.getCreatedAt())
+                .orderApprovalStatus(OrderApprovalStatus.valueOf(message.getOrderApprovalStatus().name()))
+                .failureMessages(message.getFailureMessages())
                 .build();
     }
 }
