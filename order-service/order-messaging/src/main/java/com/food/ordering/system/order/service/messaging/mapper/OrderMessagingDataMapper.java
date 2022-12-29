@@ -5,6 +5,7 @@ import com.food.ordering.system.domain.valueobject.PaymentStatus;
 import com.food.ordering.system.dto.message.PaymentResponse;
 import com.food.ordering.system.dto.message.RestaurantApprovalResponse;
 import com.food.ordering.system.entity.Order;
+import com.food.ordering.system.event.OrderCancelledEvent;
 import com.food.ordering.system.event.OrderCreatedEvent;
 import com.food.ordering.system.event.OrderPaidEvent;
 import com.food.ordering.system.kafka.order.avro.model.*;
@@ -27,7 +28,7 @@ public class OrderMessagingDataMapper {
                 .build();
     }
 
-    public PaymentRequestAvroModel orderCancelledEventToPaymentRequestAvroModel(OrderCreatedEvent orderCancelledEvent) {
+    public PaymentRequestAvroModel orderCancelledEventToPaymentRequestAvroModel(OrderCancelledEvent orderCancelledEvent) {
         Order order = orderCancelledEvent.getOrder();
         return PaymentRequestAvroModel.newBuilder()
                 .setId(UUID.randomUUID().toString())
