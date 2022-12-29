@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Builder
 public record CreateOrderCommand(@NotNull UUID customerId, @NotNull UUID restaurantId, @NotNull BigDecimal price,
-                                 @NotNull List<OrderItem> orderItems, @NotNull OrderAddress orderAddress) {
+                                 @NotNull List<OrderItem> items, @NotNull OrderAddress address) {
 }
