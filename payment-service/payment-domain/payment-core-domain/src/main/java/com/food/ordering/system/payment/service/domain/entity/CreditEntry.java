@@ -20,7 +20,6 @@ public class CreditEntry extends BaseEntity<CreditEntryId> {
     }
 
 
-
     private CreditEntry(Builder builder) {
         setId(builder.creditEntryId);
         customerId = builder.customerId;

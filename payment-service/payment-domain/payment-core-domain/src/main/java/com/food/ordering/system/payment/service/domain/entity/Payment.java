@@ -22,18 +22,18 @@ public class Payment extends AggregateRoot<PaymentId> {
     private PaymentStatus status;
     private ZonedDateTime createdAt;
 
-    public void initializePayment(){
+    public void initializePayment() {
         setId(new PaymentId(UUID.randomUUID()));
         createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
-    public void validatePayment(List<String > failureMessages){
-        if (Objects.isNull(price) || !price.isGreaterThanZero()){
+    public void validatePayment(List<String> failureMessages) {
+        if (Objects.isNull(price) || !price.isGreaterThanZero()) {
             failureMessages.add("Payment price must be greater than zero");
         }
     }
 
-    public void updateStatus ( PaymentStatus status ) {
+    public void updateStatus(PaymentStatus status) {
         this.status = status;
     }
 
