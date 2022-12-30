@@ -1,5 +1,6 @@
 package com.food.ordering.system;
 
+import com.food.ordering.system.domain.event.publisher.DomainEventPublisher;
 import com.food.ordering.system.dto.create.CreateOrderCommand;
 import com.food.ordering.system.entity.Order;
 import com.food.ordering.system.entity.Restaurant;
@@ -27,6 +28,7 @@ public class OrderCreateHelper {
     private final CustomerRepository customerRepository;
     private final RestaurantRepository restaurantRepository;
     private final OrderDataMapper orderDataMapper;
+    private final DomainEventPublisher<OrderCreatedEvent> orderCreatedEventDomainEventPublisher;
 
     @Transactional
     public OrderCreatedEvent persistOrder(CreateOrderCommand createOrderCommand) {
@@ -34,7 +36,7 @@ public class OrderCreateHelper {
         checkCustomer(createOrderCommand.customerId());
         Restaurant restaurant = checkRestaurant(createOrderCommand);
         var order = orderDataMapper.createOrderCommandToOrder(createOrderCommand);
-        var createdEventOrder = orderDomainService.validateAndInitiateOrder(order, restaurant);
+        var createdEventOrder = orderDomainService.validateAndInitiateOrder(order, restaurant, orderCreatedEventDomainEventPublisher);
         saveOrder(order);
         log.info("Created Order Event : {}", createdEventOrder);
         return createdEventOrder;
