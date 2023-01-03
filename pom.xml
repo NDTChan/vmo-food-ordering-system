@@ -117,6 +117,34 @@
                 <artifactId>kafka-config-data</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>restaurant-application-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>restaurant-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>restaurant-messaging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>restaurant-core-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.food.order</groupId>
+                <artifactId>restaurant-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
