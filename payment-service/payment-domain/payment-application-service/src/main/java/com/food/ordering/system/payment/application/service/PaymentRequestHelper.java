@@ -1,20 +1,19 @@
 package com.food.ordering.system.payment.application.service;
 
-import com.food.ordering.system.domain.event.publisher.DomainEventPublisher;
 import com.food.ordering.system.domain.valueobject.CustomerId;
 import com.food.ordering.system.payment.application.service.dto.PaymentRequest;
 import com.food.ordering.system.payment.application.service.exception.PaymentApplicationServiceException;
 import com.food.ordering.system.payment.application.service.mapper.PaymentDataMapper;
+import com.food.ordering.system.payment.application.service.ports.output.message.publisher.PaymentCancelledMessagePublisher;
+import com.food.ordering.system.payment.application.service.ports.output.message.publisher.PaymentCompletedMessagePublisher;
+import com.food.ordering.system.payment.application.service.ports.output.message.publisher.PaymentFailedMessagePublisher;
 import com.food.ordering.system.payment.application.service.ports.output.repository.CreditEntryRepository;
 import com.food.ordering.system.payment.application.service.ports.output.repository.CreditHistoryRepository;
 import com.food.ordering.system.payment.application.service.ports.output.repository.PaymentRepository;
 import com.food.ordering.system.payment.service.domain.entity.CreditEntry;
 import com.food.ordering.system.payment.service.domain.entity.CreditHistory;
 import com.food.ordering.system.payment.service.domain.entity.Payment;
-import com.food.ordering.system.payment.service.domain.event.PaymentCancelledEvent;
-import com.food.ordering.system.payment.service.domain.event.PaymentCompletedEvent;
 import com.food.ordering.system.payment.service.domain.event.PaymentEvent;
-import com.food.ordering.system.payment.service.domain.event.PaymentFailedEvent;
 import com.food.ordering.system.payment.service.domain.exception.PaymentNotFoundException;
 import com.food.ordering.system.payment.service.domain.service.PaymentDomainService;
 import lombok.RequiredArgsConstructor;
@@ -35,10 +34,9 @@ public class PaymentRequestHelper {
     private final PaymentRepository paymentRepository;
     private final CreditHistoryRepository creditHistoryRepository;
     private final CreditEntryRepository creditEntryRepository;
-
-    private final DomainEventPublisher<PaymentCompletedEvent> paymentCompletedEventDomainEventPublisher;
-    private final DomainEventPublisher<PaymentFailedEvent> paymentFailedEventDomainEventPublisher;
-    private final DomainEventPublisher<PaymentCancelledEvent> paymentCancelledEventDomainEventPublisher;
+    private final PaymentCompletedMessagePublisher paymentCompletedEventDomainEventPublisher;
+    private final PaymentFailedMessagePublisher paymentFailedEventDomainEventPublisher;
+    private final PaymentCancelledMessagePublisher paymentCancelledEventDomainEventPublisher;
 
     @Transactional
     public PaymentEvent persistPayment(PaymentRequest paymentRequest) {
