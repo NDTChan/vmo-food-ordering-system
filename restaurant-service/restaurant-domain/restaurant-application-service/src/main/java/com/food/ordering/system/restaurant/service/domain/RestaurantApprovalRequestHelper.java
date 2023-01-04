@@ -7,8 +7,8 @@ import com.food.ordering.system.restaurant.domain.core.exception.RestaurantNotFo
 import com.food.ordering.system.restaurant.domain.core.service.RestaurantDomainService;
 import com.food.ordering.system.restaurant.service.domain.dto.RestaurantApprovalRequest;
 import com.food.ordering.system.restaurant.service.domain.mapper.RestaurantDataMapper;
-import com.food.ordering.system.restaurant.service.domain.ports.output.message.publisher.RestaurantApprovedMessagePublisher;
-import com.food.ordering.system.restaurant.service.domain.ports.output.message.publisher.RestaurantRejectedMessagePublisher;
+import com.food.ordering.system.restaurant.service.domain.ports.output.message.publisher.OrderApprovedMessagePublisher;
+import com.food.ordering.system.restaurant.service.domain.ports.output.message.publisher.OrderRejectedMessagePublisher;
 import com.food.ordering.system.restaurant.service.domain.ports.output.repository.OrderApprovalRepository;
 import com.food.ordering.system.restaurant.service.domain.ports.output.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +30,8 @@ public class RestaurantApprovalRequestHelper {
     private final RestaurantDataMapper restaurantDataMapper;
     private final RestaurantRepository restaurantRepository;
     private final OrderApprovalRepository orderApprovalRepository;
-    private final RestaurantApprovedMessagePublisher restaurantApprovedMessagePublisher;
-    private final RestaurantRejectedMessagePublisher restaurantRejectedMessagePublisher;
+    private final OrderApprovedMessagePublisher orderApprovedMessagePublisher;
+    private final OrderRejectedMessagePublisher orderRejectedMessagePublisher;
 
 
     @Transactional
@@ -43,8 +43,8 @@ public class RestaurantApprovalRequestHelper {
                 restaurantDomainService.validateOrder(
                         restaurant,
                         failureMessages,
-                        restaurantApprovedMessagePublisher,
-                        restaurantRejectedMessagePublisher);
+                        orderApprovedMessagePublisher,
+                        orderRejectedMessagePublisher);
         orderApprovalRepository.save(restaurant.getOrderApproval());
         return orderApprovalEvent;
     }
