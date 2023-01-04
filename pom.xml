@@ -124,7 +124,7 @@
             </dependency>
             <dependency>
                 <groupId>com.food.ordering.system</groupId>
-                <artifactId>restaurant-dataaccess</artifactId>
+                <artifactId>restaurant-data-access</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
