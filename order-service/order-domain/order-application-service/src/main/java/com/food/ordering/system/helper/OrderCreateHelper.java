@@ -1,4 +1,4 @@
-package com.food.ordering.system;
+package com.food.ordering.system.helper;
 
 import com.food.ordering.system.domain.event.publisher.DomainEventPublisher;
 import com.food.ordering.system.dto.create.CreateOrderCommand;
