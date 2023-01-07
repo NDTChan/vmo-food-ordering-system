@@ -49,8 +49,8 @@ public class OrderMessagingDataMapper {
                 .setSagaId("")
                 .setOrderId(order.getId().getValue().toString())
                 .setRestaurantId(order.getRestaurantId().getValue().toString())
-//                .setRestaurantOrderStatus(RestaurantOrderStatus
-//                        .valueOf(order.getStatus().name()))
+                .setRestaurantOrderStatus(RestaurantOrderStatus
+                        .valueOf(order.getStatus().name()))
                 .setProducts(order.getItems().stream().map(orderItem ->
                         Product.newBuilder()
                                 .setId(orderItem.getProduct().getId().getValue().toString())
