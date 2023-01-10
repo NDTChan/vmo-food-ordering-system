@@ -8,6 +8,7 @@ import com.food.ordering.system.ports.output.message.publisher.payment.OrderCrea
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component
@@ -19,6 +20,7 @@ public class OrderCreateCommandHandler {
 
     private final OrderCreatedPaymentRequestMessagePublisher orderCreatedPaymentRequestMessagePublisher;
 
+    @Transactional
     public CreateOrderResponse createOrder(CreateOrderCommand createOrderCommand) {
         var persistOrder = orderCreateHelper.persistOrder(createOrderCommand);
         log.info("createOrder with id: {}", persistOrder.getOrder().getId().getValue());

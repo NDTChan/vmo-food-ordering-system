@@ -41,6 +41,7 @@ public class OrderApprovalSaga implements SagaStep<RestaurantApprovalResponse, E
                 restaurantApprovalResponse.getFailureMessages(),
                 orderCancelledPaymentRequestMessagePublisher);
         log.info("Order with id: {} is cancelling", order.getId().getValue());
+        orderSagaHelper.saveOrder(order);
         return domainEvent;
     }
 }

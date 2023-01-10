@@ -7,12 +7,10 @@ import com.food.ordering.system.saga.OrderApprovalSaga;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import static com.food.ordering.system.entity.Order.FAILURE_MESSAGE_DELIMITER;
 
 @Service
-@Validated
 @Slf4j
 @RequiredArgsConstructor
 public class RestaurantApprovalResponseMessageListenerImpl implements RestaurantApprovalResponseMessageListener {
