@@ -5,22 +5,22 @@
 
 ## _Order Service_
 
-![img.png](img.png)
+![img.png](img/img.png)
 
 ### Domain Event
 
-![img_1.png](img_1.png)
+![img_1.png](img/img_1.png)
 
 ### Domain Service
 
-![img_4.png](img_4.png)
+![img_4.png](img/img_4.png)
 
 ### Application Service
 
-![img_5.png](img_5.png)
+![img_5.png](img/img_5.png)
 
-![img_3.png](img_3.png)
-![img_2.png](img_2.png)
+![img_3.png](img/img_3.png)
+![img_2.png](img/img_2.png)
 
 ### **1. Implementing Domain Events in Order Service domain layer**
 
