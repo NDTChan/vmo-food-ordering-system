@@ -24,7 +24,7 @@ public class CancelOrderKafkaMessagePublisher implements OrderCancelledPaymentRe
     @Override
     public void publish(OrderCancelledEvent domainEvent) {
         String orderId = domainEvent.getOrder().getId().getValue().toString();
-        log.info("Received OrderCreatedEvent for order id: {}", orderId);
+        log.info("Received OrderCancelledEvent for order id: {}", orderId);
 
         PaymentRequestAvroModel paymentRequestAvroModel = orderMessagingDataMapper.orderCancelledEventToPaymentRequestAvroModel(domainEvent);
 

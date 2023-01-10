@@ -37,7 +37,7 @@ public class OrderMessagingDataMapper {
                 .setOrderId(order.getId().getValue().toString())
                 .setPrice(order.getPrice().amount())
                 .setCreatedAt(orderCancelledEvent.getCreatedAt().toInstant())
-                .setPaymentOrderStatus(PaymentOrderStatus.PENDING)
+                .setPaymentOrderStatus(PaymentOrderStatus.CANCELLED)
                 .build();
     }
 
