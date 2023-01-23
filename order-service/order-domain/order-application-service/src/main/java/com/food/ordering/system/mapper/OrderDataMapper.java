@@ -10,6 +10,9 @@ import com.food.ordering.system.entity.OrderItem;
 import com.food.ordering.system.entity.Product;
 import com.food.ordering.system.entity.Restaurant;
 import com.food.ordering.system.event.OrderCreatedEvent;
+import com.food.ordering.system.event.OrderPaidEvent;
+import com.food.ordering.system.outbox.model.approval.OrderApprovalEventPayload;
+import com.food.ordering.system.outbox.model.approval.OrderApprovalProduct;
 import com.food.ordering.system.outbox.model.payment.OrderPaymentEventPayload;
 import com.food.ordering.system.valueobject.StreetAddress;
 import org.springframework.stereotype.Component;
@@ -86,6 +89,22 @@ public class OrderDataMapper {
                 .price(order.getOrder().getPrice().amount())
                 .createdAt(order.getCreatedAt())
                 .paymentOrderStatus(PaymentOrderStatus.PENDING.name())
+                .build();
+    }
+
+    public OrderApprovalEventPayload orderPaidEventToOrderApprovalEventPayload(OrderPaidEvent orderPaidEvent) {
+        return OrderApprovalEventPayload.builder()
+                .orderId(orderPaidEvent.getOrder().getId().getValue().toString())
+                .restaurantId(orderPaidEvent.getOrder().getRestaurantId().getValue().toString())
+                .restaurantOrderStatus(RestaurantOrderStatus.PAID.name())
+                .products(orderPaidEvent.getOrder().getItems().stream()
+                        .map(orderItem -> OrderApprovalProduct.builder()
+                                .id(orderItem.getProduct().getId().getValue().toString())
+                                .quantity(orderItem.getQuantity())
+                                .build())
+                        .toList())
+                .price(orderPaidEvent.getOrder().getPrice().amount())
+                .createdAt(orderPaidEvent.getCreatedAt())
                 .build();
     }
 }

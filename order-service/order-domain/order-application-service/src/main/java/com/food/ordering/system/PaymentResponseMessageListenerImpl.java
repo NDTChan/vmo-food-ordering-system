@@ -1,7 +1,6 @@
 package com.food.ordering.system;
 
 import com.food.ordering.system.dto.message.PaymentResponse;
-import com.food.ordering.system.event.OrderPaidEvent;
 import com.food.ordering.system.ports.input.message.listener.payment.PaymentResponseMessageListener;
 import com.food.ordering.system.saga.OrderPaymentSaga;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +20,8 @@ public class PaymentResponseMessageListenerImpl implements PaymentResponseMessag
 
     @Override
     public void paymentCompleted(PaymentResponse paymentResponse) {
-        OrderPaidEvent domainEvent = orderPaymentSaga.process(paymentResponse);
-        log.info("Publishing OrderPaidEvent for order id: {}", paymentResponse.getId());
-        domainEvent.fire();
+        orderPaymentSaga.process(paymentResponse);
+        log.info("Order Payment saga process completed id {}", paymentResponse.getId());
     }
 
     @Override
