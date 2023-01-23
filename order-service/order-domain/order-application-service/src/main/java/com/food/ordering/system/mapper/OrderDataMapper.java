@@ -1,9 +1,6 @@
 package com.food.ordering.system.mapper;
 
-import com.food.ordering.system.domain.valueobject.CustomerId;
-import com.food.ordering.system.domain.valueobject.Money;
-import com.food.ordering.system.domain.valueobject.ProductId;
-import com.food.ordering.system.domain.valueobject.RestaurantId;
+import com.food.ordering.system.domain.valueobject.*;
 import com.food.ordering.system.dto.create.CreateOrderCommand;
 import com.food.ordering.system.dto.create.CreateOrderResponse;
 import com.food.ordering.system.dto.create.OrderAddress;
@@ -12,6 +9,8 @@ import com.food.ordering.system.entity.Order;
 import com.food.ordering.system.entity.OrderItem;
 import com.food.ordering.system.entity.Product;
 import com.food.ordering.system.entity.Restaurant;
+import com.food.ordering.system.event.OrderCreatedEvent;
+import com.food.ordering.system.outbox.model.payment.OrderPaymentEventPayload;
 import com.food.ordering.system.valueobject.StreetAddress;
 import org.springframework.stereotype.Component;
 
@@ -80,4 +79,13 @@ public class OrderDataMapper {
                 .build();
     }
 
+    public OrderPaymentEventPayload orderCreatedEventToOrderPaymentEventPayload(OrderCreatedEvent order) {
+        return OrderPaymentEventPayload.builder()
+                .orderId(order.getOrder().getId().getValue().toString())
+                .customerId(order.getOrder().getCustomerId().getValue().toString())
+                .price(order.getOrder().getPrice().amount())
+                .createdAt(order.getCreatedAt())
+                .paymentOrderStatus(PaymentOrderStatus.PENDING.name())
+                .build();
+    }
 }
